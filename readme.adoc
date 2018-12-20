@@ -1,0 +1,12 @@
+= AWS MFA
+
+If you use AWS CLI with Multi-Factor Authentication, this tool is made for you.
+
+image:https://asciinema.org/a/217866.png["aws-mfa", link="https://asciinema.org/a/217866"]
+
+== How to Install
+
+[source, shell]
+----
+go get -u github.com/mmatur/aws-mfa
+----
