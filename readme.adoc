@@ -4,9 +4,46 @@ If you use AWS CLI with Multi-Factor Authentication, this tool is made for you.
 
 image:https://asciinema.org/a/217866.png["aws-mfa", link="https://asciinema.org/a/217866"]
 
+== Prerequisite
+
+You should be sure to adapt your `~/.aws/credentials` file like that before using `aws-mfa`
+[source, shell]
+----
+cat ~/.aws/credentials
+[default-long-term]
+aws_access_key_id     = XXXXXXXXXXXX
+aws_secret_access_key = YYYYYYYYYYY
+----
+
+
 == How to Install
 
 [source, shell]
 ----
 go get -u github.com/mmatur/aws-mfa
+----
+
+== Command
+[source, shell]
+----
+aws-mfa --help
+AWS - MFA
+
+Usage: aws-mfa [flags] <command> [<arguments>]
+
+Use "aws-mfa <command> --help" for help on any command.
+
+Commands:
+	version                                            Display the version.
+
+Flag's usage: aws-mfa [--flag=flag_argument] [-f[flag_argument]] ...     set flag_argument to flag(s)
+          or: aws-mfa [--flag[=true|false| ]] [-f[true|false| ]] ...     set true/false to boolean flag(s)
+
+Flags:
+    --credentialfile Credential file. (default: ~/.aws/credentials)                       (default "/home/michael/.aws/credentials")
+    --debug          Enable debug                                                         (default "false")
+    --duration       Duration in seconds for credentials to remain valid (default: 43200) (default "43200")
+    --force          Force credentials renew                                              (default "false")
+    --profile        AWS profile to use. (default: default)                               (default "default")
+-h, --help           Print Help (this message) and exit
 ----
