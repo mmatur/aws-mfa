@@ -9,7 +9,7 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws/external"
 	"github.com/containous/flaeg"
-	"github.com/mitchellh/go-homedir"
+	homedir "github.com/mitchellh/go-homedir"
 	"github.com/mmatur/aws-mfa/cmd"
 	"github.com/mmatur/aws-mfa/meta"
 	"github.com/mmatur/aws-mfa/types"
@@ -82,7 +82,6 @@ func rootRun(config *types.Config) error {
 		return nil
 	}
 
-	//awsConfig, err := external.LoadDefaultAWSConfig()
 	awsConfig, err := external.LoadDefaultAWSConfig(
 		external.WithSharedConfigProfile(config.Profile + longTermSuffix))
 
