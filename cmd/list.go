@@ -15,9 +15,14 @@ func ListMFADevices(awsConfig aws.Config) ([]string, error) {
 		return nil, err
 	}
 
+	splits := strings.Split(arn, "user/")
+	if len(splits) < 2 {
+		return nil, fmt.Errorf("unable to split arn %q", arn)
+	}
+
 	iAM := iam.New(awsConfig)
 	req := iAM.ListMFADevicesRequest(&iam.ListMFADevicesInput{
-		UserName: aws.String(strings.Split(arn, "user/")[1]),
+		UserName: aws.String(splits[1]),
 	})
 
 	resp, err := req.Send()
