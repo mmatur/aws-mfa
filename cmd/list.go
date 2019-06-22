@@ -1,6 +1,7 @@
 package cmd
 
 import (
+	"context"
 	"fmt"
 	"strings"
 
@@ -25,12 +26,12 @@ func ListMFADevices(awsConfig aws.Config) ([]string, error) {
 		UserName: aws.String(splits[1]),
 	})
 
-	resp, err := req.Send()
+	resp, err := req.Send(context.Background())
 	if err != nil {
 		return nil, err
 	}
 
-	return displayMFADevices(resp), nil
+	return displayMFADevices(resp.ListMFADevicesOutput), nil
 }
 
 func displayMFADevices(output *iam.ListMFADevicesOutput) []string {
