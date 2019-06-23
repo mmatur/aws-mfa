@@ -1,6 +1,7 @@
 package cmd
 
 import (
+	"context"
 	"errors"
 	"time"
 
@@ -32,7 +33,7 @@ func GetSessionToken(awsConfig aws.Config, duration int64, device string, code s
 		TokenCode:       aws.String(code),
 	})
 
-	resp, err := req.Send()
+	resp, err := req.Send(context.Background())
 	if err != nil {
 		return nil, err
 	}
@@ -58,7 +59,7 @@ func getCurrentUserARN(awsConfig aws.Config) (string, error) {
 	service := sts.New(awsConfig)
 	req := service.GetCallerIdentityRequest(&sts.GetCallerIdentityInput{})
 
-	resp, err := req.Send()
+	resp, err := req.Send(context.Background())
 	if err != nil {
 		return "", err
 	}
