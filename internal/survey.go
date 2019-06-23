@@ -1,10 +1,10 @@
-package cmd
+package internal
 
 import (
 	"errors"
 
-	"github.com/mmatur/aws-mfa/types"
-	"gopkg.in/AlecAivazis/survey.v1"
+	"github.com/mmatur/aws-mfa/internal/types"
+	survey "gopkg.in/AlecAivazis/survey.v1"
 )
 
 // PromptSurvey prompts survey to user

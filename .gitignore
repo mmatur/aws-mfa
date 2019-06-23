@@ -1,6 +1,5 @@
 vendor/
 .idea/
-aws-mfa
 cover.out
 temp/
 dist/
