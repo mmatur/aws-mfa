@@ -77,7 +77,12 @@ func rootRun() error {
 		return nil
 	}
 
-	awsConfig, err := external.LoadDefaultAWSConfig(profile + longTermSuffix)
+	err = os.Setenv(external.AWSProfileEnvVar, profile+longTermSuffix)
+	if err != nil {
+		return err
+	}
+
+	awsConfig, err := external.LoadDefaultAWSConfig(external.DefaultSharedCredentialsFilename())
 	if err != nil {
 		return err
 	}
@@ -101,16 +106,16 @@ func rootRun() error {
 		return err
 	}
 
-	profile, err := internal.GetSessionToken(awsConfig, duration, answer.Device, answer.Code)
+	p, err := internal.GetSessionToken(awsConfig, duration, answer.Device, answer.Code)
 	if err != nil {
 		return err
 	}
 
-	if err = updateAWSCredentials(cfg, profile); err != nil {
+	if err = updateAWSCredentials(cfg, p); err != nil {
 		return err
 	}
 
-	fmt.Printf("Success! Credentials for profile %q valid until %s \n", profile, profile.Expiration)
+	fmt.Printf("Success! Credentials for profile %q valid until %s \n", profile, p.Expiration)
 	return nil
 }
 
