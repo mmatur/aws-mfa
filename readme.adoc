@@ -20,7 +20,7 @@ aws_secret_access_key = YYYYYYYYYYY
 
 [source, shell]
 ----
-go get -u github.com/mmatur/aws-mfa
+go get -u github.com/mmatur/aws-mfa/cmd/aws-mfa
 ----
 
 == Command
