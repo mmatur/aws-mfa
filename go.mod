@@ -16,5 +16,5 @@ require (
 	golang.org/x/crypto v0.0.0-20190701094942-4def268fd1a4 // indirect
 	golang.org/x/sys v0.0.0-20190712062909-fae7ac547cb7 // indirect
 	gopkg.in/AlecAivazis/survey.v1 v1.8.5
-	gopkg.in/ini.v1 v1.46.0
+	gopkg.in/ini.v1 v1.48.0
 )
