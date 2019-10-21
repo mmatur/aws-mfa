@@ -4,7 +4,7 @@ go 1.12
 
 require (
 	github.com/Netflix/go-expect v0.0.0-20180928190340-9d1f4485533b // indirect
-	github.com/aws/aws-sdk-go-v2 v0.11.0
+	github.com/aws/aws-sdk-go-v2 v0.15.0
 	github.com/hinshun/vt10x v0.0.0-20180809195222-d55458df857c // indirect
 	github.com/konsorten/go-windows-terminal-sequences v1.0.2 // indirect
 	github.com/kr/pty v1.1.8 // indirect
