@@ -14,6 +14,7 @@ func PromptSurvey(devices []string) (*types.SurveyAnswer, error) {
 	}
 
 	var qs []*survey.Question
+
 	answer := &types.SurveyAnswer{}
 
 	if len(devices) > 1 {

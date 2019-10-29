@@ -36,6 +36,7 @@ func ListMFADevices(awsConfig aws.Config) ([]string, error) {
 
 func displayMFADevices(output *iam.ListMFADevicesOutput) []string {
 	var devices []string
+
 	if output == nil || len(output.MFADevices) == 0 {
 		fmt.Println("* 0 devices.")
 	} else {
