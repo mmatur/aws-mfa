@@ -88,11 +88,14 @@ func rootRun() error {
 	}
 
 	var devices []string
+
 	if cfg.Section(profile + longTermSuffix).HasKey("aws_mfa_device") {
 		device := cfg.Section(profile + longTermSuffix).Key("aws_mfa_device").String()
+
 		if debug {
 			fmt.Printf("MFA device %q found in %q for profile %q\n", device, credentialFile, profile+longTermSuffix)
 		}
+
 		devices = append(devices, device)
 	} else {
 		devices, err = internal.ListMFADevices(awsConfig)
@@ -116,12 +119,14 @@ func rootRun() error {
 	}
 
 	fmt.Printf("Success! Credentials for profile %q valid until %s \n", profile, p.Expiration)
+
 	return nil
 }
 
 func credentialStillValid(cfg *ini.File) bool {
 	if cfg.Section(profile).HasKey("expiration") && !force {
 		expirationUnparsed := cfg.Section(profile).Key("expiration").String()
+
 		expiration, err := time.Parse("2006-01-02 15:04:05", expirationUnparsed)
 		if err != nil {
 			log.Fatalf("Unable to parse %s", expirationUnparsed)
