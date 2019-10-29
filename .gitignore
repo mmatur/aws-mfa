@@ -3,3 +3,4 @@ vendor/
 cover.out
 temp/
 dist/
+aws-mfa

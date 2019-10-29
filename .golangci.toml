@@ -1,16 +1,14 @@
 [run]
-  deadline = "5m"
+  timeout = "5m"
+  skip-files = []
 
 [linters-settings]
 
   [linters-settings.govet]
     check-shadowing = true
 
-  [linters-settings.golint]
-    min-confidence = 0.0
-
   [linters-settings.gocyclo]
-    min-complexity = 15.0
+    min-complexity = 13.0
 
   [linters-settings.maligned]
     suggest-new = true
@@ -25,12 +23,44 @@
 [linters]
   enable-all = true
   disable = [
+    "maligned",
     "lll",
     "gas",
     "dupl",
     "prealloc",
-    "maligned",
-    "gochecknoinits",
-    "gochecknoglobals",
     "scopelint",
+    "funlen",
+    "godox",
+    "stylecheck",
+    "wsl",
   ]
+
+[issues]
+  exclude-use-default = false
+  max-per-linter = 0
+  max-same-issues = 0
+  exclude = []
+  [[issues.exclude-rules]]
+    path = "annotations.go"
+    text = "`(compatibilityMapping)` is a global variable"
+
+  [[issues.exclude-rules]]
+    path = ".*_test.go"
+    text = "`(updateExpected)` is a global variable"
+
+  [[issues.exclude-rules]]
+    path = "main.go"
+    text = "`(Version|ShortCommit|Date)` is a global variable"
+
+  [[issues.exclude-rules]]
+    path = "main.go"
+    text = "exported var `(Version|ShortCommit|Date)` should have comment or be unexported"
+
+  [[issues.exclude-rules]]
+    path = "ingress/annotations.go"
+    text = "`getBoolValue` - `defaultValue` always receives `false`"
+
+  [[issues.exclude-rules]]
+    path = "static/v1.go"
+    text = "exported type `(.+)` should have comment or be unexported"
+

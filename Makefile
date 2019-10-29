@@ -1,44 +1,32 @@
-BINARY_NAME = aws-mfa
-DIST_DIR = $(CURDIR)/dist
-DIST_DIR_AWS_MFA = $(DIST_DIR)/$(BINARY_NAME)
-
-TAG_NAME := $(shell git tag -l --contains HEAD)
-SHA := $(shell git rev-parse --short HEAD)
-VERSION := $(if $(TAG_NAME),$(TAG_NAME),$(SHA))
-BUILD_DATE := $(shell date -u '+%Y-%m-%d_%I:%M:%S%p')
+.PHONY: check clean test build package package-snapshot docs
 
 export GO111MODULE=on
 
-GOFILES := $(shell git ls-files '*.go' | grep -v '^vendor/')
+TAG_NAME := $(shell git tag -l --contains HEAD)
+SHA := $(shell git rev-parse HEAD)
+VERSION := $(if $(TAG_NAME),$(TAG_NAME),$(SHA))
+DATE := $(shell date +'%Y-%m-%d %H:%M:%S')
 
-default: clean check test build
+default: check test build
 
-$(DIST_DIR):
-	mkdir -p $(DIST_DIR)
-
-dependencies:
-	go mod download
-
-clean:
-	rm -rf dist/ cover.out
-
-test: clean
+test:
 	go test -v -cover ./...
 
-build:
-	CGO_ENABLED=0 go build -o ${DIST_DIR_AWS_MFA} -ldflags="-s -w \
-	-X github.com/mmatur/$(BINARY_NAME)/cmd/version.version=$(VERSION) \
-	-X github.com/mmatur/$(BINARY_NAME)/cmd/version.commit=$(SHA) \
-	-X github.com/mmatur/$(BINARY_NAME)/cmd/version.date=$(BUILD_DATE)" \
-	$(CURDIR)/cmd/$(BINARY_NAME)/*.go
+clean:
+	rm -rf dist/
+
+build: clean
+	@echo Version: $(VERSION)
+	go build -v -ldflags '-X "main.Version=${VERSION}" -X "main.ShortCommit=${SHA}" -X "main.Date=${DATE}"' .
 
 check:
 	golangci-lint run
 
-fmt:
-	@gofmt -s -l -w $(GOFILES)
+doc:
+	go run . doc
 
-imports:
-	@goimports -w $(GOFILES)
+package:
+	goreleaser --skip-publish --skip-validate --rm-dist
 
-.PHONY: clean check test build dependencies fmt imports
+package-snapshot:
+	goreleaser --skip-publish --skip-validate --rm-dist --snapshot
