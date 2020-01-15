@@ -1,3 +1,5 @@
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fmmatur%2Faws-mfa.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fmmatur%2Faws-mfa?ref=badge_shield)
+
 = AWS MFA
 
 If you use AWS CLI with Multi-Factor Authentication, this tool is made for you.
@@ -47,3 +49,7 @@ Flags:
     --profile        AWS profile to use. (default: default)                               (default "default")
 -h, --help           Print Help (this message) and exit
 ----
+
+
+## License
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fmmatur%2Faws-mfa.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fmmatur%2Faws-mfa?ref=badge_large)
